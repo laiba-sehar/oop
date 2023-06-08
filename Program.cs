@@ -1,79 +1,66 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using coffeetask.BL;
+using coffeetask.UI;
 
-namespace task1Point
+namespace coffeetask
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            myLine line = new myLine();
-            myPoint start = new myPoint();
-            string choice = null;
-            do
+            Coffeetask n = new Coffeetask();
+            int option;
+            double total = 0;
+            while (true)
             {
-               choice = UI.menu();
-                if (choice == "1")
+                Console.Clear();
+                option = UserInterface.mainMenu();
+                if (option == 1)
                 {
-                    Console.Clear();
-                    line = UI.ch1();
-                    UI.prnt(line);
+                    MenuItem m = coffeetask.UI.UserInterface.addMenuItem();
+                    Coffeetask.storeInList(m);
+                    Console.ReadKey();
                 }
-                else if (choice == "2")
+                else if (option == 2)
                 {
-                    Console.Clear();
-                    start = UI.ch2();
-                    line.setBegin(start);
+                    Coffeetask.viewCheapestItem();
+                    Console.ReadKey();
                 }
-                else if (choice == "3")
+                else if (option == 3)
                 {
-                    Console.Clear();
-                    start = UI.ch3();
-                    line.setEnd(start);
+                    Coffeetask.viewDrinkMenu();
+                    Console.ReadKey();
                 }
-                else if (choice == "4")
+                else if (option == 4)
                 {
-                    Console.Clear();
-                    UI.prntUpdateStarting(line);
+                    Coffeetask.viewFoodMenu();
+                    Console.ReadKey();
                 }
-                else if (choice == "5")
+                else if (option == 5)
                 {
-                    Console.Clear();
-                    UI.prntUpdateEnding(line);
+                    total = Coffeetask.addOrder();
+                    Console.ReadKey();
                 }
-                else if (choice == "6")
+                else if (option == 6)
                 {
-                    Console.Clear();
-                    double length =line. getLength();
-                    UI.ch6(length);
+                    Coffeetask.viewOrderInList();
+                    Console.ReadKey();
                 }
-                else if (choice == "7")
+                else if (option == 7)
                 {
-                    Console.Clear();
-                    double grad=line.getGradient();
-                    UI.ch7(grad);
+                    Coffeetask.fulfillOrder();
+                    Console.ReadKey();
                 }
-                else if (choice == "8")
+                else if (option == 8)
                 {
-                    Console.Clear();
-                    line.setBegin(start);
-                    double disB= start.distanceSFromZero();
-                    UI.ch7(disB);
+                    UserInterface.dueAmount(total);
+                    Console.ReadKey();
                 }
-                else if (choice == "9")
+                else if(option == 9)
                 {
-                    Console.Clear();
-                    line.setEnd(start);
-                    double eb = start.distanceEFromZero();
-                    UI.ch9(eb);
+                    break;
                 }
-
-
-            } while(choice != "10");
-            
+            }
         }
     }
 }
